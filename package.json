@@ -3,5 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "hejianfang <hejf@lexueguo.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.10.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "mongoose": "^5.7.7"
+  }
 }
