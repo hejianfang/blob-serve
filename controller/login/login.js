@@ -8,40 +8,30 @@
  */
 const Users = require('../../dataBase/modal/user');
 const register = async (ctx) => {
-  let loginUser = ctx.request.body;
-  await Users.findOne({'email': loginUser.email}).then(async data => {
-    if (data) {
-      ctx.body = {
-        code: 400,
-        message: '已经注册'
-      }
+  let {username,email,pwd} = ctx.request.body;
+  let data = await Users.findOne({email})
+  if (data) {
+    ctx.body = {code: 400, message: '已经注册'}
+  } else {
+    let user = new Users({username,email,pwd});
+    let res = await user.save();
+    if (res) {
+      ctx.body = {code: 200, message: '注册成功'}
     } else {
-      let user = new Users({
-        username: loginUser.username,
-        email: loginUser.email,
-        pwd: loginUser.pwd,
-      });
-      await user.save().then(data=>{
-        ctx.body={
-          code : 200,
-          message : '成功',
-          data
-        }
-      }).catch(err=>{
-        ctx.body={
-          code : 300,
-          message : '不成功'
-        }
-      });
+      ctx.body = {code: 400, message: '注册失败'}
     }
-  }).catch(err => {
-    ctx.body={
-      code : 500,
-      message : '失败'
-    }
-  })
+  }
 };
-
+const login = async ctx => {
+  let {username} = ctx.request.body;
+  let res = await Users.findOne({username});
+  if (res) {
+    ctx.body = {code: 200, msg: '登录成功', data: {username}}
+  } else {
+    ctx.body = {code: 400, msg: '用户不存在，请先注册！'}
+  }
+};
 module.exports = {
-  register
+  register,
+  login
 };
