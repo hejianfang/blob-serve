@@ -8,12 +8,13 @@
  */
 const Users = require('../../dataBase/modal/user');
 const register = async (ctx) => {
-  let {username,email,pwd} = ctx.request.body;
+  let {username, email, pwd} = ctx.request.body;
   let data = await Users.findOne({email})
   if (data) {
     ctx.body = {code: 400, message: '已经注册'}
   } else {
-    let user = new Users({username,email,pwd});
+    let avatar = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3289761550,697278018&fm=27&gp=0.jpg"
+    let user = new Users({username,email,pwd,avatar});
     let res = await user.save();
     if (res) {
       ctx.body = {code: 200, message: '注册成功'}
