@@ -8,11 +8,11 @@
  */
 const mongoose = require('mongoose');
 const userSchame = new mongoose.Schema({
-  username:{
+  username: {
     type: String,
     required: true
   },
-  email:{
+  email: {
     type: String,
     required: true
   },
