@@ -7,6 +7,8 @@
  * @Last modified time: 2019-10-29
  */
 const Users = require('../../dataBase/modal/user');
+const setToken = require('../../public/token/index.js')
+    // 注册接口
 const register = async(ctx) => {
     let { username, email, pwd } = ctx.request.body;
     let data = await Users.findOne({ email });
@@ -23,22 +25,40 @@ const register = async(ctx) => {
         }
     }
 };
+// 登录接口
 const login = async ctx => {
-    let { username, password } = ctx.request.body;
+    let { username, password, autoLogin } = ctx.request.body;
     let res = await Users.findOne({ username });
     if (res) {
-        console.log(res)
-        let { avatar, createdAt, updatedAt, pwd } = res;
+        let { avatar, createdAt, updatedAt, pwd, _id } = res;
         if (password !== pwd) {
             ctx.body = { code: 400, msg: '密码不正确' }
         } else {
-            ctx.body = { code: 200, msg: '登录成功', data: { username, avatar, createdAt, updatedAt } }
+            setToken.setToken(username, _id, autoLogin).then(res => {
+                ctx.body = { code: 200, msg: '登录成功', data: { username, avatar, createdAt, updatedAt, token: res } }
+            })
         }
     } else {
-        ctx.body = { code: 400, msg: '用户不存在，请先注册！' }
+        ctx.body = { code: 400, msg: '用户不存在，请联系管理员开通用户！' }
     }
 };
+// 是否登录
+const isLogin = async ctx => {
+    let myInfo = ctx.state;
+    if (!myInfo) {
+        ctx.body = {
+            code: 200,
+            data: false
+        }
+    } else {
+        ctx.body = {
+            code: 200,
+            data: true
+        }
+    }
+}
 module.exports = {
     register,
-    login
+    login,
+    isLogin
 };
