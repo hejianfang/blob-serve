@@ -6,8 +6,8 @@
  * @Last modified by: hejian
  * @Last modified time: 2019-10-29
  */
-const Users = require('../../dataBase/modal/user');
-const setToken = require('../../public/token/index.js')
+const Users = require('../dataBase/modal/user');
+const setToken = require('../public/token/index.js')
     // 注册接口
 const register = async(ctx) => {
     let { username, email, pwd } = ctx.request.body;
@@ -35,7 +35,7 @@ const login = async ctx => {
             ctx.body = { code: 400, msg: '密码不正确' }
         } else {
             setToken.setToken(username, _id, autoLogin).then(res => {
-                ctx.body = { code: 200, msg: '登录成功', data: { username, avatar, createdAt, updatedAt, token: res } }
+                ctx.body = { code: 200, msg: '登录成功', data: { token: res } }
             })
         }
     } else {
