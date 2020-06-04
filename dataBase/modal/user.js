@@ -7,7 +7,8 @@
  * @Last modified time: 2019-10-29
  */
 const mongoose = require('mongoose');
-const userSchame = new mongoose.Schema({
+const autoIncrement = require('mongoose-auto-increment');
+const userScheme = new mongoose.Schema({
   username: {
     type: String,
     required: true
@@ -24,7 +25,11 @@ const userSchame = new mongoose.Schema({
     type: String,
   }
 },{versionKey: false, timestamps: {createAt: "createTime", updateAt: "updateTime"}});
-
-let Users = mongoose.model("Users",userSchame,"user");
-
-module.exports = Users;
+// 自增 ID 插件配置
+userScheme.plugin(autoIncrement.plugin, {
+  model: 'Users',
+  field: 'id',
+  startAt: 1,
+  incrementBy: 1,
+});
+module.exports = mongoose.model("Users",userScheme,"user");

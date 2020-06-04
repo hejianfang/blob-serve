@@ -8,12 +8,15 @@
  */
 // koa 入口文件
 const Koa = require('koa');
-require('./database/config');
 const app = new Koa();
 const serve = require('koa-static');
 const path = require('path');
 const koaJwt = require('koa-jwt');
 const verToken = require('./public/token/index')
+const mongodb = require('./database/config');
+// data server
+mongodb.connect();
+
 app.use(serve('./assets'));
 app.use(serve(
   path.join(__dirname, './uploads')
@@ -50,7 +53,7 @@ app.use(async(ctx, next) => {
 app.use(koaJwt({
     secret: 'my_token'
 }).unless({
-    path: ['/api/login'] //除了这个地址，其他的URL都需要验证
+    path: ['/api/login', '/api/register'] //除了这个地址，其他的URL都需要验证
 }));
 // 文件上传
 const koaBody = require('koa-body');
