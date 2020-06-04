@@ -8,7 +8,7 @@
  */
 const path = require('path');
 const fs = require('mz/fs');
-const Router = require('koa-router');
+const Router = require('koa-router')
 const router = new Router({
     prefix: '/api', // 统一前缀，接口全部为 /api/xxx 格式
 });
@@ -23,7 +23,7 @@ const addControllers = (dir) => {
     //遍历引入控制器模块并处理 路径-方法 的映射
     js_files.forEach(f => {
         //引入控制器模块
-        let mapping = require(path.join(__dirname, dir, f))
+        let mapping = require(path.join(__dirname, dir, f));
         Object.keys(mapping).forEach(key => {
             router.all('/' + key, mapping[key]); // router.all是允许所有的访问方式，如果需要限定则改为指定方式即可
         });
