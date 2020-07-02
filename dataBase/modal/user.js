@@ -6,7 +6,7 @@
  * @Last modified by: hejian
  * @Last modified time: 2019-10-29
  */
-const mongoose = require('mongoose');
+const { mongoose } = require('../config');
 const autoIncrement = require('mongoose-auto-increment');
 const userScheme = new mongoose.Schema({
   username: {
@@ -17,14 +17,19 @@ const userScheme = new mongoose.Schema({
     type: String,
     required: true
   },
-  pwd:{
+  pwd: {
     type: String,
     required: true
   },
   avatar: {
     type: String,
-  }
-},{versionKey: false, timestamps: {createAt: "createTime", updateAt: "updateTime"}});
+  },
+  phone: {
+    type: [String, Number]
+  },
+  type: [String, Number],
+  introduce: String
+}, { versionKey: false, timestamps: { createAt: "createTime", updateAt: "updateTime" } });
 // 自增 ID 插件配置
 userScheme.plugin(autoIncrement.plugin, {
   model: 'Users',
@@ -32,4 +37,4 @@ userScheme.plugin(autoIncrement.plugin, {
   startAt: 1,
   incrementBy: 1,
 });
-module.exports = mongoose.model("Users",userScheme,"user");
+module.exports = mongoose.model("Users", userScheme, "user");
