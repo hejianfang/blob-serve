@@ -62,7 +62,19 @@ const articleListPages = async (ctx) => {
     }
   }
 }
+// 根据id获取文章详情--管理端
+const getArticleDetail = async ctx => {
+  let {id} = ctx.request.query
+  let result = await Article.findOne({id})
+  if (result) {
+    ctx.body = {
+      code: 200,
+      data: result
+    }
+  }
+}
 module.exports = {
   addArticle,
-  articleListPages
+  articleListPages,
+  getArticleDetail
 }

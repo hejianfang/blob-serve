@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "hejianfang <hejf@lexueguo.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node ./app.js",
+    "dev": "NODE_ENV=development node-dev ./bin/www"
+  },
   "dependencies": {
     "consola": "^2.12.2",
     "jsonwebtoken": "^8.5.1",
