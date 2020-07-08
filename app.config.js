@@ -7,7 +7,5 @@
  * @Last modified time: 2020-06-04
  */
 exports.MONGODB = {
-  uri: `mongodb://127.0.0.1:27017/blob`,
-  username: 'admin',
-  password: '123456',
+  uri: `mongodb://admin:123456@127.0.0.1:27017/blob`
 }
