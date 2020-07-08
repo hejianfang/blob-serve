@@ -13,7 +13,7 @@ const serve = require('koa-static');
 const path = require('path');
 const koaJwt = require('koa-jwt');
 const verToken = require('./public/token/index')
-const mongodb = require('./database/config');
+const mongodb = require('./dataBase/config');
 // data server
 mongodb.connect();
 
@@ -27,13 +27,9 @@ app.use(async (ctx, next) => {
   if (token == 'undefined') {
     await next();
   } else {
-    try {
-      let data = await verToken.verToken(token);
-      ctx.state = { data };
-      await next();
-    } catch (err) {
-      await next();
-    }
+    let data = await verToken.verToken(token);
+    ctx.state = { data };
+    await next();
   }
 });
 app.use(async (ctx, next) => {
@@ -70,7 +66,7 @@ app.use(bodyParser())
 app.use(router.routes()).use(router.allowedMethods());
 
 
-let server = app.listen(3001, function () {
+let server = app.listen(3303, function () {
   const host = server.address().address;
   const port = server.address().port;
   console.log('app start listening at http://%s:%s', host, port);

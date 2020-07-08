@@ -6,16 +6,8 @@
  * @Last modified by: hejian
  * @Last modified time: 2019-10-29
  */
-// let mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost:27017/blob',{ useNewUrlParser: true } );
-//
-// let db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// db.once('open', function() {
-//   console.log("we are connected! ")
-// });
 const consola = require('consola')
-const CONFIG = require('../app.config.js')
+const config = require('../app.config.js')
 const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment')
 
@@ -30,10 +22,8 @@ exports.mongoose = mongoose
 
 // connect
 exports.connect = () => {
-  // console.log('CONFIG.MONGODB.uri :', CONFIG.MONGODB.uri)
-
   // 连接数据库
-  mongoose.connect(CONFIG.MONGODB.uri, {
+  mongoose.connect(config.MONGODB.uri, {
     useCreateIndex: true,
     useNewUrlParser: true,
     promiseLibrary: global.Promise

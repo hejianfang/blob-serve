@@ -6,9 +6,8 @@
  * @Last modified by: hejian
  * @Last modified time: 2020-06-04
  */
-const { argv } = require('yargs');
 exports.MONGODB = {
-  uri: `mongodb://127.0.0.1:${argv.dbport || '27017'}/blob`,
-  username: argv.db_username || 'admin',
-  password: argv.db_password || '123456',
+  uri: `mongodb://127.0.0.1:27017/blob`,
+  username: 'admin',
+  password: '123456',
 }
