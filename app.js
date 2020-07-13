@@ -24,7 +24,7 @@ app.use(serve(
 // jwt
 app.use(async (ctx, next) => {
   let token = ctx.header.authorization;
-  if (token == 'undefined') {
+  if (token === 'undefined') {
     await next();
   } else {
     let data = await verToken.verToken(token);
@@ -34,7 +34,7 @@ app.use(async (ctx, next) => {
 });
 app.use(async (ctx, next) => {
   return next().catch((err) => {
-    if (401 == err.status) {
+    if (401 === err.status || 500 === err.status) {
       ctx.status = 200;
       ctx.body = {
         code: 401,

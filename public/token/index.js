@@ -5,11 +5,10 @@ exports.setToken = async(userName, userId, autoLogin) => {
     if (autoLogin) {
         expiresIn = '168h'
     }
-    console.log(expiresIn)
-    let token = await jwt.sign({ userName, userId }, 'my_token', { expiresIn })
+  const token = await jwt.sign({ userName, userId }, 'my_token', { expiresIn })
     return token
 }
 exports.verToken = async(token) => {
-    let myInfo = jwt.verify(token.split(' ')[1], 'my_token')
+    const myInfo = await jwt.verify(token.split(' ')[1], 'my_token')
     return myInfo
 }
