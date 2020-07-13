@@ -17,8 +17,7 @@ const mongodb = require('./dataBase/config');
 // data server
 mongodb.connect();
 
-app.use(serve('./assets'));
-app.use(serve('./public/dist'));
+app.use(serve(__dirname + '/public/dist'));
 app.use(serve(
   path.join(__dirname, './uploads')
 ))
