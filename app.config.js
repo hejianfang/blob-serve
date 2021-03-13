@@ -7,5 +7,5 @@
  * @Last modified time: 2020-06-04
  */
 exports.MONGODB = {
-  uri: `mongodb://admin:123456@62.234.90.11:27017/blob?authSource=admin`
+  uri: `mongodb://47.96.228.199/blob`
 }
