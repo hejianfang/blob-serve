@@ -7,7 +7,7 @@
  * @Last modified time: 2019-10-29
  */
 const path = require('path');
-const fs = require('mz/fs');
+const fs = require('fs');
 const Router = require('koa-router')
 const router = new Router({
     prefix: '/api', // 统一前缀，接口全部为 /api/xxx 格式
