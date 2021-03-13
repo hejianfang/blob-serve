@@ -7,5 +7,5 @@
  * @Last modified time: 2020-06-04
  */
 exports.MONGODB = {
-  uri: `mongodb://47.96.228.199/blob`
+  uri: `mongodb://127.0.0.1:27017/blob`
 }
